@@ -21,7 +21,7 @@ function createTable() {
 }
 
 function click(){
-  console.log('cllick');
+  console.log('cllick'); 
 }
   
 
