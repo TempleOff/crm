@@ -1,0 +1,36 @@
+body{
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+}
+form{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 400px;
+}
+input{
+    margin: 10px;
+    padding: 10px;
+    border: unset;
+    border-bottom: 2px solid;
+    outline: none;
+}
+button{
+    margin: 10px;
+    padding: 10px;
+    background-color:black;
+    color: white;
+    border: solid 1px black;
+    border-radius: 10px;
+    cursor:pointer;
+}
+a{
+    color:#0000006b;
+    font-weight: bold;
+    text-decoration: none;
+}
+.header{
+    display: flex;
+    background: grey;
+}
