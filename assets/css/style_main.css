@@ -17,6 +17,9 @@ a{
 details>summary{
     list-style-type: none; 
 }
+th{
+    padding: 20px;
+}
 details:hover{
     cursor: pointer;
 }
@@ -25,10 +28,22 @@ details:hover{
     flex-direction: column;
     align-items: center;
 }
-th{
-    padding: 20px;
+.update_user{
+    display: none;
+    flex-direction: column;
+    align-items: center;
 }
-.create_table{
+.clients{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+.reports{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+.history{
     display: none;
     flex-direction: column;
     align-items: center;

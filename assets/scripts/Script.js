@@ -1,27 +1,70 @@
 function roles() {
   var form_role = document.getElementById("form_roles");
-  var form_table = document.getElementById("form_create-table");
+  var form_client = document.getElementById("form_clients");
+  var form_report = document.getElementById("form_reports");
+  var form_story = document.getElementById("form_history");
   if (form_role.style.display == "flex") {
-    form.style.display = "none";
+    form_role.style.display = "none";
   } else {
     form_role.style.display = "flex"; 
-    form_table.style.display = "none";
+    form_client.style.display = "none";
+    form_report.style.display = "none";
+    form_story.style.display = "none";
   }
 }
 
-function createTable() {
-  var form_table = document.getElementById("form_create-table");
+function clients() {
   var form_role = document.getElementById("form_roles");
-  if (form_table.style.display == "flex") {
-    form_table.style.display = "none";
+  var form_client = document.getElementById("form_clients");
+  var form_report = document.getElementById("form_reports");
+  var form_story = document.getElementById("form_history");
+  if (form_client.style.display == "flex") {
+    form_client.style.display = "none";
   } else {
-    form_table.style.display = "flex"; 
+    form_client.style.display = "flex"; 
     form_role.style.display = "none";
+    form_report.style.display = "none";
+    form_story.style.display = "none";
   }
 }
 
-function click(){
-  console.log('cllick'); 
+function reports() {
+  var form_role = document.getElementById("form_roles");
+  var form_client = document.getElementById("form_clients");
+  var form_report = document.getElementById("form_reports");
+  var form_story = document.getElementById("form_history");
+  if (form_report.style.display == "flex") {
+    form_report.style.display = "none";
+  } else {
+    form_report.style.display = "flex";
+    form_client.style.display = "none"; 
+    form_role.style.display = "none";
+    form_story.style.display = "none";
+  }
+}
+
+function history() {
+  var form_role = document.getElementById("form_roles");
+  var form_client = document.getElementById("form_clients");
+  var form_report = document.getElementById("form_reports");
+  var form_story = document.getElementById("form_history");
+  if (form_story.style.display == "flex") {
+    form_story.style.display = "none";
+  } else {
+    form_story.style.display = "flex";
+    form_client.style.display = "none"; 
+    form_role.style.display = "none";
+    form_report.style.display = "none";
+  }
+}
+
+function show_update(){
+  var form_updateUser = document.getElementById("form_update_user");
+  if (form_updateUser.style.display == "flex") {
+    form_updateUser.style.display = "none";
+  } else {
+    form_updateUser.style.display = "flex";
+  }
 }
   
 
