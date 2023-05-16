@@ -5,7 +5,9 @@
     $company_name = $_POST['company_name'];
     $login = $_POST['login'];
     $paswd = $_POST['password'];
-
+    
+    $user_name = $login;
+    $_SESSION['user_name'] = $user_name;//Имя пользователя
     $_SESSION['db_name']=$company_name;
     
     try{

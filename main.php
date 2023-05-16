@@ -8,6 +8,9 @@
 
     $clients = mysqli_query($connect,"SELECT * FROM `clients`");
     $clients = mysqli_fetch_all($clients);
+
+    $history = mysqli_query($connect,"SELECT * FROM `history`");
+    $history = mysqli_fetch_all($history);
 ?>
 
 <!DOCTYPE html>
@@ -91,6 +94,7 @@
 
     <div class="clients" id="form_clients">
         <input type="text" placeholder="Поиск">
+        <a href="vendor/new_client.php">Добавить нового клиента</a>
         <table>
             <tr>
                 <th>Дата регистрации</th>
@@ -117,13 +121,36 @@
         </table>  
     </div>
 
+    <div class="history" id="form_history"><!----><!----><!---->
+        <table>
+            <tr>
+                <th>Дата и время</th>
+                <th>Комитор</th>
+                <th>Категория изменения</th>
+                <th>Изменение</th>
+            </tr>
+
+            <?php
+                foreach($history as $story){
+            ?>
+                <tr>
+                    <td><?php echo $story[1];?></td>
+                    <td><?php echo $story[2];?></td>
+                    <td><?php echo $story[3];?></td>
+                    <td><?php echo $story[4];?></td>
+                </tr>
+            <?php        
+            }
+            ?>
+
+        </table>  
+    </div>
+
     <div class="reports" id="form_reports">
         <p>тут будет находится таблица с отчетами</p>
     </div>
 
-    <div class="history" id="form_history">
-        <p>тут будет находится таблица с историей</p>
-    </div>
+
 
 </body>
 <script src="assets/scripts/Script.js"></script>

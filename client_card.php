@@ -1,8 +1,9 @@
 <?php
-
+    session_start();
     require_once('config/connect.php');
     $client_id = $_GET['id'];
-    
+    $_SESSION['id_client'] = $client_id;
+
     $client = mysqli_query($connect,"SELECT * FROM `clients` WHERE `id`='$client_id'");
     $client = mysqli_fetch_assoc($client);
 
@@ -10,7 +11,7 @@
     $notes = mysqli_fetch_all($notes);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="rus">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,6 +55,7 @@
             <button type="submit">Обновить данные</button>
         </form>
         <a href="main.php">Назад</a>
+        <a href="vendor/del_client.php">удалить клиента</a>
         <br>
         <h2>Заметки клиента</h2>
         <form action="vendor/note_client.php" method="post">
