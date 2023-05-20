@@ -1,5 +1,4 @@
 <?php
-    session_start();
     require_once('config/connect.php');
     $client_id = $_GET['id'];
     $_SESSION['id_client'] = $client_id;
@@ -7,8 +6,11 @@
     $client = mysqli_query($connect,"SELECT * FROM `clients` WHERE `id`='$client_id'");
     $client = mysqli_fetch_assoc($client);
 
-    $notes = mysqli_query($connect,"SELECT * FROM `coments` WHERE `client_id`='$client_id'");
-    $notes = mysqli_fetch_all($notes);
+    //$notes = mysqli_query($connect,"SELECT * FROM `coments` WHERE `client_id`='$client_id'");
+    //$notes = mysqli_fetch_all($notes);
+
+    $task = mysqli_query($connect,"SELECT * FROM `task` WHERE `client_id`='$client_id'");
+    $task = mysqli_fetch_all($task);
 ?>
 <!DOCTYPE html>
 <html lang="rus">
@@ -46,10 +48,14 @@
             <input name="up_date" type="date" value="<?= $client['register_date']?>">
             <br>
             <label>Источник</label>
-            <select name="up_source" name="new_role" id=""> <!--Нужно исправить-->
-                <option value="<?= $client['source']?>"></option>
-                <option value="Администратор">Администратор</option>
-                <option value="Сотрудник">Сотрудник</option>
+            <select name="up_source">
+                <option value="<?= $client['source'] ?>" selected><?= $client['source'] ?></option> 
+                <option value="Интернет">Интернет</option>
+                <option value="Социальные сети">Социальные сети</option>
+                <option value="Знакомые">Знакомые</option>
+                <option value="Рассылка">Рассылка</option>
+                <option value="ТВ">ТВ</option>
+                <option value="Радио">Радио</option>
             </select>
             <br>
             <button type="submit">Обновить данные</button>
@@ -57,29 +63,30 @@
         <a href="main.php">Назад</a>
         <a href="vendor/del_client.php">удалить клиента</a>
         <br>
-        <h2>Заметки клиента</h2>
-        <form action="vendor/note_client.php" method="post">
-            <input type="hidden" name="id" value="<?= $client_id?>">
 
-            <input name="note" type="text" placeholder="Введите заметку">
-            <button type="submit">Добавить заметку</button>
+        <h2>Заказы клиента</h2>
+        <form action="vendor/create_task.php" method="post">
+            <input name="new_task" type="text">
+            <button type="submit">Добавить заказ</button>
         </form>
+
         <table>
             <tr>
-                <th>Дата</th>
-                <th>Текст</th>
+                <th>Наименование заказа</th>
+                <th>Статус заказа</th>
             </tr>
             <?php
-                foreach($notes as $note){
+                foreach($task as $tsk){
             ?>
                 <tr>
-                    <td><?php echo $note[2];?></td>
-                    <td><?php echo $note[3];?></td>
+                    <td><?php echo $tsk[2];?></td>
+                    <td><?php echo $tsk[4];?></td>
+                    <td><a href="client_task.php?id=<?php echo $tsk[0];?>">Параметры</a></td>
                 </tr>
             <?php        
             }
             ?>
-        </table>  
+        </table>
     </div> 
 </body>
 </html>

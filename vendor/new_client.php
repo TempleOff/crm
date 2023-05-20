@@ -32,9 +32,14 @@
             <input name="up_date" type="date" value="<?= $client['register_date']?>">
             <br>
             <label>Источник</label>
-            <select name="up_source" name="new_role" id=""> <!--Нужно исправить-->
-                <option value="Администратор">Администратор</option>
-                <option value="Сотрудник">Сотрудник</option>
+            <select name="up_source">
+                <option value="<?= $client['source'] ?>" selected><?= $client['source'] ?></option>
+                <option value="Интернет">Интернет</option>
+                <option value="Социальные сети">Социальные сети</option>
+                <option value="Знакомые">Знакомые</option>
+                <option value="Рассылка">Рассылка</option>
+                <option value="ТВ">ТВ</option>
+                <option value="Радио">Радио</option>
             </select>
             <br>
             <button type="submit">Добавить клиента</button>

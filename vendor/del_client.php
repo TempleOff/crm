@@ -13,6 +13,7 @@
     mysqli_query($connect,"INSERT INTO `history` (`id`, `data_time`, `user`, `change_name`, `changed_info`) VALUES (NULL, '$date_time ', '$user_name', 'Удаление клиента', '$client')");
 
     mysqli_query($connect,"DELETE FROM `clients` WHERE `clients`.`id` = $id;");
+    mysqli_query($connect,"DELETE FROM `task` WHERE `task`.`client_id` = $id;");
 
 
     header('Location: ../main.php');

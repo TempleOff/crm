@@ -121,7 +121,7 @@
         </table>  
     </div>
 
-    <div class="history" id="form_history"><!----><!----><!---->
+    <div class="history" id="form_history">
         <table>
             <tr>
                 <th>Дата и время</th>
@@ -145,7 +145,7 @@
 
         </table>  
     </div>
-
+    
     <div class="reports" id="form_reports">
         <p>тут будет находится таблица с отчетами</p>
     </div>
