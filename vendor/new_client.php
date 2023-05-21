@@ -12,28 +12,28 @@
     <div class="client_info">
         <form class="form_clientInfo" action="create_client.php" method="post">
             <label>Фамилия Имя Отчество</label>
-            <input name="up_fio" type="text" value="<?= $client['fio']?>">
+            <input name="up_fio" type="text" value="<?= $client['fio']?>"required>
             <br>
             <label>Адрес</label>
-            <input name="up_address" type="text" value="<?= $client['address']?>">
+            <input name="up_address" type="text" value="<?= $client['address']?>"required>
             <br>
             <label>Телефон</label>
-            <input name="up_telephone" type="text" value="<?= $client['telephone']?>">
+            <input name="up_telephone" type="text" value="<?= $client['telephone']?>"required>
             <br>
             <label>Почта</label>
-            <input name="up_mail" type="text" value="<?= $client['mail']?>">
+            <input name="up_mail" type="text" value="<?= $client['mail']?>"required>
             <br>
             <label>Рабочая область</label>
-            <input name="up_link" type="text" value="<?= $client['link']?>">
+            <input name="up_link" type="text" value="<?= $client['link']?>"required>
             <br>
             <label>Примечание</label>
-            <input name="up_note" type="text" value="<?= $client['note']?>">
+            <input name="up_note" type="text" value="<?= $client['note']?>"required>
             <br>
             <label>Дата регистрации</label>
-            <input name="up_date" type="date" value="<?= $client['register_date']?>">
+            <input name="up_date" type="date" value="<?= $client['register_date']?>"required>
             <br>
             <label>Источник</label>
-            <select name="up_source">
+            <select name="up_source"required>
                 <option value="<?= $client['source'] ?>" selected><?= $client['source'] ?></option>
                 <option value="Интернет">Интернет</option>
                 <option value="Социальные сети">Социальные сети</option>
@@ -45,6 +45,7 @@
             <br>
             <button type="submit">Добавить клиента</button>
         </form>
+        <a href="../main.php">Назад</a>
     </div>
 </body>
 </html>

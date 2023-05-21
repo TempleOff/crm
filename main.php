@@ -140,11 +140,11 @@
 
         <form action="vendor/create_user.php" method="post">
             <label>Логин</label>
-            <input name="new_login" type="text" placeholder="Введите имя">
+            <input name="new_login" type="text" placeholder="Введите имя"required>
             <label>Пароль</label>
-            <input name="new_password" type="text" placeholder="Введите пароль">
+            <input name="new_password" type="text" placeholder="Введите пароль"required>
             <label>Должность</label>
-            <input name="new_post" type="text" placeholder="Введите должность">
+            <input name="new_post" type="text" placeholder="Введите должность"required>
             <label>Роль</label>
             <select name="new_role" id="">
                 <option value="Администратор">Администратор</option>

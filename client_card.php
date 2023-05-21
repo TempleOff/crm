@@ -62,9 +62,9 @@
             <button type="submit">Обновить данные</button>
         </form>
         <a href="main.php">Назад</a>
+        <br>
         <a href="vendor/del_client.php">удалить клиента</a>
         <br>
-
         <h2>Заказы клиента</h2>
         <form action="vendor/create_task.php" method="post">
             <input name="new_task" type="text">

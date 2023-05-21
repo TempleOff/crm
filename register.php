@@ -12,13 +12,17 @@
     <form action="vendor/signup.php" method="post" autocomplete="off">
         <h1>Регистрация</h1>
         <label>Логин</label>
-        <input type="text" name="name_user" placeholder="Введите ваше имя">
+        <input type="text" name="name_user" placeholder="Введите ваше имя"required>
+        <br>
         <label>Пароль</label>
-        <input type="password" name="password" placeholder="Создайте пароль">
+        <input type="password" name="password" placeholder="Создайте пароль"required>
+        <br>
         <label>Подтверждение пароля</label>
-        <input type="password" name="password_confirm" placeholder="Введите ранее созданный пароль">
+        <input type="password" name="password_confirm" placeholder="Введите ранее созданный пароль"required>
+        <br>
         <label>Название организации</Label>
-        <input type="text" name="company_name" placeholder="Введите название вашей организации">
+        <input type="text" name="company_name" placeholder="Введите название вашей организации"required>
+        <br>
         <button  type="submit">Зарегистрироваться</button>
         <a href="/index.php">Назад</a>
         

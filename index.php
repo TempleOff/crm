@@ -12,11 +12,14 @@
     <form action="vendor/authorization.php" method="post" autocomplete="off">
         <h1>CRM-system</h1>
         <label>Логин</label>
-        <input name="login" type="text" placeholder="Введите имя">
+        <input name="login" type="text" placeholder="Введите имя"required>
+        <br>
         <label>Пароль</label>
-        <input name="password" type="password" placeholder="Введите пароль">
+        <input name="password" type="password" placeholder="Введите пароль"required>
+        <br>
         <label>Название организации</Label>
-        <input name="company_name" type="text" placeholder="Введите название организации">
+        <input name="company_name" type="text" placeholder="Введите название организации"required>
+        <br>
         <button>Вход</button>
         <a href="/register.php">Регистрация</a>
     </form>
