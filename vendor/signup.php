@@ -13,7 +13,7 @@
         mysqli_query($connect,"INSERT INTO `$company_name`. `users` (`id`, `name`, `password`, `company_name`, `roles`,`post`) VALUES (NULL, '$name_user', '$password', '$company_name', 'Создатель','')");
 
         mysqli_query($connect,"CREATE TABLE `$company_name`.`clients` (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT , `fio` VARCHAR(255) NOT NULL , `address` VARCHAR(255) NOT NULL , `telephone` VARCHAR(255) NOT NULL , `mail` VARCHAR(255) NOT NULL , `link` VARCHAR(255) NOT NULL , `note` VARCHAR(255) NOT NULL , `register_date` VARCHAR(255) NOT NULL , `source` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
-        mysqli_query($connect,"CREATE TABLE `$company_name`.`comments` (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT , `task_id` INT NOT NULL , `date_time` VARCHAR(255) NOT NULL , `coment` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
+        mysqli_query($connect,"CREATE TABLE `$company_name`.`comments` (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT , `task_id` INT NOT NULL ,`user_name` VARCHAR(255) NOT NULL , `date_time` VARCHAR(255) NOT NULL , `coment` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
         mysqli_query($connect,"CREATE TABLE `$company_name`.`history`(`id` INT UNSIGNED NOT NULL AUTO_INCREMENT , `data_time` VARCHAR(255) NOT NULL , `user` VARCHAR(255) NOT NULL , `change_name` VARCHAR(255) NOT NULL , `changed_info` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
         mysqli_query($connect,"CREATE TABLE `$company_name`.`task` (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT , `client_id` INT NOT NULL , `name_task` VARCHAR(255) NOT NULL , `desc`TEXT, `status` VARCHAR(20),`price` INT , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
         
