@@ -3,14 +3,91 @@
     require_once('config/connect.php');
     $company_name = $_SESSION['db_name'];
 
-    $role = mysqli_query($connect,"SELECT * FROM `users`");
-    $role = mysqli_fetch_all($role);
+    $users = mysqli_query($connect,"SELECT * FROM `users`");
+    $users = mysqli_fetch_all($users);
 
     $clients = mysqli_query($connect,"SELECT * FROM `clients`");
     $clients = mysqli_fetch_all($clients);
 
     $history = mysqli_query($connect,"SELECT * FROM `history`");
     $history = mysqli_fetch_all($history);
+    //для источников
+    $clients_sourse = mysqli_query($connect,"SELECT `source` FROM `clients`");
+    $clients_sourse = mysqli_fetch_all($clients_sourse);
+
+    $table_source = array();
+
+    foreach($clients_sourse as $src){
+        
+        if(!in_array($src[0],$table_source) ){
+            array_push($table_source,$src[0]);
+        }
+    }
+    //для кол-во клиентов
+    $table_count = array();
+
+    foreach($table_source as $src){
+        $clients_sourse = mysqli_query($connect,"SELECT `source` FROM clients WHERE source = '$src'");
+        if(mysqli_num_rows($clients_sourse) >= 1){
+            array_push( $table_count,mysqli_num_rows($clients_sourse));
+        }
+    }
+    //для прибыли 
+    $table_price = array();
+
+    foreach($table_source as $src){
+        $client_id = mysqli_query($connect,"SELECT `id` FROM clients WHERE source = '$src'");
+        $client_id = mysqli_fetch_all($client_id);
+        $out_price = 0;
+        foreach($client_id as $id){
+            $task_price = mysqli_query($connect,"SELECT `price` FROM task WHERE client_id = '$id[0]'");
+            $task_price = mysqli_fetch_all($task_price);
+            
+            foreach($task_price as $price){
+                $out_price = $out_price+$price[0];
+            }
+            
+        }
+        array_push($table_price,$out_price);
+    }
+    //для отчета кол-во заказов и суммирования ценника
+    $client_task_count = array();
+    $client_task_price = array();
+    foreach($clients as $client_id){
+        $task_price = mysqli_query($connect,"SELECT `price` FROM task WHERE client_id = '$client_id[0]'");
+        array_push($client_task_count,mysqli_num_rows($task_price));
+        $task_price = mysqli_fetch_all($task_price);
+        $out_price = 0;
+        foreach($task_price as $price){
+            $out_price = $out_price+$price[0];
+        }
+        array_push($client_task_price,$out_price);
+    }
+    //
+    $users_task_count = array();
+    $users_task_price = array();
+    $users_SA = array();
+    $user_comment_count = array();
+    foreach ($users as $user) {
+        $task_price = mysqli_query($connect,"SELECT `price`,`id` FROM task WHERE supervisor_id = '$user[0]'");
+        array_push($users_task_count,mysqli_num_rows($task_price));
+        $task_price = mysqli_fetch_all($task_price);
+        $out_price = 0;
+        foreach($task_price as $price){
+            $out_price = $out_price+$price[0];
+        }
+        array_push($users_task_price,$out_price);
+
+        $comment_count = 0;
+        foreach($task_price as $price){
+            $comment = mysqli_query($connect,"SELECT * FROM comments WHERE supervisor_id = '$user[0]'");
+           
+            array_push($user_comment_count,mysqli_num_rows($comment));
+        } 
+    }
+    for ($i=0; $i < count($users_task_count); $i++) { 
+        array_push($users_SA,($user_comment_count[$i]/$users_task_count[$i]));
+    }
 ?>
 
 <!DOCTYPE html>
@@ -46,15 +123,15 @@
             </tr>
 
             <?php
-                foreach($role as $roleItems){
+                foreach($users as $usersItems){
             ?>
                 <tr>
-                    <td><?php echo $roleItems[1];?></td>
-                    <td><?php echo $roleItems[2];?></td>
-                    <td><?php echo $roleItems[5];?></td>
-                    <td><?php echo $roleItems[4];?></td>
-                    <td><a href="vendor/del_user.php?id=<?php echo $roleItems[0];?>">Удалить</a></td>
-                    <td><a href="vendor/update_user.php?id=<?php echo $roleItems[0];?>" onclick="show_update()">Изменить</a></td>
+                    <td><?php echo $usersItems[1];?></td>
+                    <td><?php echo $usersItems[2];?></td>
+                    <td><?php echo $usersItems[5];?></td>
+                    <td><?php echo $usersItems[4];?></td>
+                    <td><a href="vendor/del_user.php?id=<?php echo $usersItems[0];?>">Удалить</a></td>
+                    <td><a href="vendor/update_user.php?id=<?php echo $usersItems[0];?>" onclick="show_update()">Изменить</a></td>
                 </tr>
             <?php        
             }
@@ -123,6 +200,7 @@
     </div>
 
     <div class="history" id="form_history">
+
         <table>
             <tr>
                 <th>Дата и время</th>
@@ -147,8 +225,87 @@
         </table>  
     </div>
     
+    <br>
+    
     <div class="reports" id="form_reports">
-        <p>тут будет находится таблица с отчетами</p>
+        <div class="tabs">
+            <div class="tab">
+                <input type="radio" id="tab1" name="tab-group" checked>
+                <label for="tab1" class="tab-title">Отчеты по источникам</label> 
+                <section class="tab-content">
+                    <table>
+                        <tr>
+                            <th>Источники</th>
+                            <th>Кол-во клиентов</th>
+                            <th>Прибыль</th>
+                        </tr>
+                        <?php
+                           for ($i=0; $i < count($table_source); $i++) { 
+                        ?>
+                            <tr>
+                                <td><?php echo $table_source[$i];?></td>
+                                <td><?php echo $table_count[$i];?></td>
+                                <td><?php echo $table_price[$i];?></td>
+                            </tr>
+                        <?php        
+                        }
+                        ?>
+                    </table>  
+                </section>
+            </div> 
+            <div class="tab">
+                <input type="radio" id="tab2" name="tab-group">
+                <label for="tab2" class="tab-title">Доход с клиентов</label> 
+                <section class="tab-content">
+                    <table>
+                        <tr>
+                            <th>ФИО</th>
+                            <th>Источник</th>
+                            <th>Кол-во заказов</th>
+                            <th>Доход</th>
+                        </tr>
+                        <?php
+                           for ($i=0; $i < count($clients); $i++) { 
+                        ?>
+                            <tr>
+                                <td><?php echo $clients[$i][1];?></td>
+                                <td><?php echo $clients[$i][8];?></td>
+                                <td><?php echo $client_task_count[$i];?></td>
+                                <td><?php echo $client_task_price[$i];?></td>
+                            </tr>
+                        <?php        
+                        }
+                        ?>
+                    </table>  
+                </section>
+            </div>
+            <div class="tab">
+                <input type="radio" id="tab3" name="tab-group">
+                <label for="tab3" class="tab-title">Эффективность сотрудников</label> 
+                <section class="tab-content">
+                    <table>
+                        <tr>
+                            <th>Имя сотрудника</th>
+                            <th>Кол-во заказов</th>
+                            <th>Доход</th>
+                            <th>Средняя активность</th>
+                        </tr>
+                        <?php
+                           for ($i=0; $i < count($users); $i++) { 
+                        ?>
+                            <tr>
+                                <td><?php echo $users[$i][1]?></td>
+                                <td><?php echo $users_task_count[$i]?></td>
+                                <td><?php echo $users_task_price[$i]?></td>
+                                <td><?php echo $users_SA[$i]?></td>
+                            </tr>
+                        <?php        
+                        }
+                        ?>
+                    </table> 
+                </section> 
+            </div> 
+        </div>
     </div>
 
 

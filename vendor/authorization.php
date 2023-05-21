@@ -9,6 +9,8 @@
     $user_name = $login;
     $_SESSION['user_name'] = $user_name;//Имя пользователя
     $_SESSION['db_name']=$company_name;
+
+
     
     try{
         error_reporting(0);
@@ -28,9 +30,11 @@
     $result = mysqli_query($connect, $sql);  
     
     if (mysqli_num_rows($result) == 1) {
+        $result = mysqli_fetch_all($result);
+        $_SESSION['user_id'] = $result[0][0];
         header("Location:../main.php");
     } else {
         header("Location:../index.php");
     }
-
+    
 ?>
