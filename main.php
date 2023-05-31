@@ -1,5 +1,6 @@
 <?php
     session_start();
+    error_reporting(0);
     require_once('config/connect.php');
     $company_name = $_SESSION['db_name'];
 
@@ -81,12 +82,18 @@
         $comment_count = 0;
         foreach($task_price as $price){
             $comment = mysqli_query($connect,"SELECT * FROM comments WHERE supervisor_id = '$user[0]'");
-           
+            //echo (mysqli_num_rows($comment));
             array_push($user_comment_count,mysqli_num_rows($comment));
-        } 
+        }
+
     }
     for ($i=0; $i < count($users_task_count); $i++) { 
-        array_push($users_SA,($user_comment_count[$i]/$users_task_count[$i]));
+        if ($users_task_count[$i]==0) {
+            array_push($users_SA,0);
+        }else{
+            array_push($users_SA,($user_comment_count[$i]/$users_task_count[$i]));
+        }
+        
     }
 ?>
 
@@ -140,11 +147,11 @@
 
         <form action="vendor/create_user.php" method="post">
             <label>Логин</label>
-            <input name="new_login" type="text" placeholder="Введите имя"required>
+            <input name="new_login" type="text" placeholder="Введите имя"required autocomplete="off">
             <label>Пароль</label>
-            <input name="new_password" type="text" placeholder="Введите пароль"required>
+            <input name="new_password" type="text" placeholder="Введите пароль"required autocomplete="off">
             <label>Должность</label>
-            <input name="new_post" type="text" placeholder="Введите должность"required>
+            <input name="new_post" type="text" placeholder="Введите должность"required autocomplete="off">
             <label>Роль</label>
             <select name="new_role" id="">
                 <option value="Администратор">Администратор</option>

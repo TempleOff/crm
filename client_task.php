@@ -50,7 +50,7 @@
 
         <form action="vendor/task_note.php" method="post">
             <input type="hidden" name="id" value="<?= $task_id?>">
-            <input name="comment" type="text" placeholder="Введите коментарий">
+            <input name="comment" type="text" placeholder="Введите коментарий"required autocomplete="off">
             <button type="submit">Добавить коментарий</button>
         </form>
         <table>

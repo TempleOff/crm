@@ -12,25 +12,25 @@
     <div class="client_info">
         <form class="form_clientInfo" action="create_client.php" method="post">
             <label>Фамилия Имя Отчество</label>
-            <input name="up_fio" type="text" value="<?= $client['fio']?>"required>
+            <input name="up_fio" type="text" value="<?= $client['fio']?>"required autocomplete="off">
             <br>
             <label>Адрес</label>
-            <input name="up_address" type="text" value="<?= $client['address']?>"required>
+            <input name="up_address" type="text" value="<?= $client['address']?>"required autocomplete="off">
             <br>
             <label>Телефон</label>
-            <input name="up_telephone" type="text" value="<?= $client['telephone']?>"required>
+            <input name="up_telephone" type="text" value="<?= $client['telephone']?>"required autocomplete="off">
             <br>
             <label>Почта</label>
-            <input name="up_mail" type="text" value="<?= $client['mail']?>"required>
+            <input name="up_mail" type="text" value="<?= $client['mail']?>"required autocomplete="off">
             <br>
             <label>Рабочая область</label>
-            <input name="up_link" type="text" value="<?= $client['link']?>"required>
+            <input name="up_link" type="text" value="<?= $client['link']?>"required autocomplete="off">
             <br>
             <label>Примечание</label>
-            <input name="up_note" type="text" value="<?= $client['note']?>"required>
+            <input name="up_note" type="text" value="<?= $client['note']?>"required autocomplete="off">
             <br>
             <label>Дата регистрации</label>
-            <input name="up_date" type="date" value="<?= $client['register_date']?>"required>
+            <input name="up_date" type="date" value="<?= $client['register_date']?>"required autocomplete="off">
             <br>
             <label>Источник</label>
             <select name="up_source"required>

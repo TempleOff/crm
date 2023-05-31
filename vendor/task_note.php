@@ -9,6 +9,6 @@
 
     mysqli_query($connect,"INSERT INTO `comments` (`id`, `task_id`, `user_name`, `date_time`, `coment`,`supervisor_id`) VALUES (NULL, '$task_id', '$user_name', '$date_time', '$comment','$user_id')");
 
-    header("Location:../client_task.php?id={$client}");
+    header("Location:../client_task.php?id={$task_id}");
 
 ?>

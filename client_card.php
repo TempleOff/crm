@@ -67,7 +67,7 @@
         <br>
         <h2>Заказы клиента</h2>
         <form action="vendor/create_task.php" method="post">
-            <input name="new_task" type="text">
+            <input name="new_task" type="text"required autocomplete="off">
             <button type="submit">Добавить заказ</button>
         </form>
 
