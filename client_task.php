@@ -1,22 +1,20 @@
 <?php
     require_once('config/connect.php');
+    include_once('vendor/date_base.php');
     $task_id = !empty($_GET['id']) ? trim($_GET['id']) : '';
 
     $task_id = htmlspecialchars($task_id);
 
     $client_id = $_SESSION['id_client'];
 
-    $notes = mysqli_query($connect,"SELECT user_name,date_time,coment FROM `comments` WHERE `task_id`='$task_id'");
-    $notes = mysqli_fetch_all($notes);
+    $notes = get_notes_to_task_card($connect,$task_id);
 
-    $task = mysqli_query($connect,"SELECT `name_task`,`desc`,`status`,`price` FROM `task` WHERE `id`='$task_id'");
-    $task = mysqli_fetch_assoc($task);
+    $task = get_tasks_to_task_card($connect,$task_id);
 
     $task_name = $task['name_task'];
     $task_desk = $task['desc'];
 
-    $result = mysqli_query($connect, "SELECT id FROM clients WHERE id = $client_id");
-    $client = mysqli_fetch_assoc($result);
+    
 ?>
 <!DOCTYPE html> <?php ?>
 <html lang="rus">
@@ -30,7 +28,7 @@
 </head>
 <body>   
     <div class="client_info">
-        <form class="client_info" action="vendor/task_info.php" method="post">
+        <form class="client_info" action="vendor/db/task_info.php" method="post">
             <input type="hidden" name="id" value="<?= $task_id?>">
             <input type="hidden" name="task_name" value="<?= $task_name?>">
             <h1>Задача: <?php echo ($task_name)?></h1>
@@ -50,7 +48,7 @@
 
         <br>
 
-        <form action="vendor/task_note.php" method="post">
+        <form action="vendor/db/task_note.php" method="post">
             <input type="hidden" name="id" value="<?= $task_id?>">
             <input name="comment" type="text" placeholder="Введите коментарий"required autocomplete="off">
             <button type="submit">Добавить коментарий</button>
@@ -76,6 +74,6 @@
         </table> 
 
     </div>
-    <a href="../client_card.php?id=<?php echo $client['id']; ?>">Назад</a>
+    <a href="../client_card.php?id=<?php echo $client_id; ?>">Назад</a>
 </body>
 </html>

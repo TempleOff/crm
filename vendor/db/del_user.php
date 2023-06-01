@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    require_once('../config/connect.php');
+    require_once('../../config/connect.php');
     $id = $_GET['id'];
     
     $user_name = $_SESSION['user_name'];
@@ -14,6 +14,6 @@
 
     mysqli_query($connect,"DELETE FROM `users` WHERE `users`.`id` = $id;");
 
-    header('Location: ../main.php');
+    header('Location: ../../main.php');
 
 ?>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
 </head>
 <body>
-    <form action="vendor/signup.php" method="post" autocomplete="off">
+    <form action="vendor/db/signup.php" method="post" autocomplete="off">
         <h1>Регистрация</h1>
         <label>Логин</label>
         <input type="text" name="name_user" placeholder="Введите ваше имя"required>

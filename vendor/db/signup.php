@@ -1,5 +1,5 @@
 <?php   
-    require_once('../config/connect.php'); 
+    require_once('../../config/connect.php'); 
 
     $name_user = !empty($_POST['name_user']) ? trim($_POST['name_user']) : '';
     $password = !empty($_POST['password']) ? trim($_POST['password']) : '';
@@ -21,10 +21,10 @@
         mysqli_query($connect,"CREATE TABLE `$company_name`.`history`(`id` INT UNSIGNED NOT NULL AUTO_INCREMENT , `data_time` VARCHAR(255) NOT NULL , `user` VARCHAR(255) NOT NULL , `change_name` VARCHAR(255) NOT NULL , `changed_info` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
         mysqli_query($connect,"CREATE TABLE `$company_name`.`task` (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT , `client_id` INT NOT NULL , `name_task` VARCHAR(255) NOT NULL , `desc`TEXT, `status` VARCHAR(20),`price` INT ,`supervisor_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
         
-        header('Location:../index.php');
+        header('Location:../../index.php');
     }
     else{
-        header('Location:../register.php');
+        header('Location:../../register.php');
     }
 
 ?>

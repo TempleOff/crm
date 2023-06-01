@@ -1,6 +1,6 @@
 <?php  
     session_start();
-    require_once('../config/connect.php'); 
+    require_once('../../config/connect.php'); 
 
     $company_name = !empty($_POST['company_name']) ? trim($_POST['company_name']) : '';
     $login = !empty($_POST['login']) ? trim($_POST['login']) : '';
@@ -23,7 +23,7 @@
         }
     }
     catch(Exception $ex){
-        header('Location:../index.php');
+        header('Location:../../index.php');
         exit();
     }
     error_reporting(E_ALL);
@@ -33,11 +33,11 @@
     $result = mysqli_query($connect, $sql);  
     
     if (mysqli_num_rows($result) == 1) {
-        $result = mysqli_fetch_all($result);
-        $_SESSION['user_id'] = $result;
-        header("Location:../main.php");
+        $result = mysqli_fetch_assoc($result);
+        $_SESSION['user_id'] = $result['id'];
+        header("Location:../../main.php");
     } else {
-        header("Location:../index.php");
+        header("Location:../../index.php");
     }
     
 ?>

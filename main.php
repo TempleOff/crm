@@ -2,99 +2,33 @@
     session_start();
     error_reporting(0);
     require_once('config/connect.php');
+    include_once('vendor/date_base.php');
+    include_once('vendor/calculate.php');
     $company_name = $_SESSION['db_name'];
 
-    $users = mysqli_query($connect,"SELECT `id`,`name`,`password`,`roles`,`post` FROM `users`");
-    $users = mysqli_fetch_all($users);
+    $users = get_all_users($connect);
 
-    $clients = mysqli_query($connect,"SELECT `id`,`fio`,`telephone`,`mail`,`link`,`register_date`,`source` FROM `clients`");
-    $clients = mysqli_fetch_all($clients);
+    $clients = get_clients_to_main($connect);
 
-    $history = mysqli_query($connect,"SELECT `data_time`,`user`,`change_name`,`changed_info` FROM `history`");
-    $history = mysqli_fetch_all($history);
+    $history = get_history($connect);
     //для источников
-    $clients_sourse = mysqli_query($connect,"SELECT `source` FROM `clients`");
-    $clients_sourse = mysqli_fetch_all($clients_sourse);
+    $clients_sourse = get_clients_sourse($connect);
 
-    $table_source = array();
-
-    foreach($clients_sourse as $src){
-        
-        if(!in_array($src[0],$table_source) ){
-            array_push($table_source,$src[0]);
-        }
-    }
+    $table_source = get_source($clients_sourse);
     //для кол-во клиентов
-    $table_count = array();
-
-    foreach($table_source as $src){
-        $clients_sourse = mysqli_query($connect,"SELECT `source` FROM clients WHERE source = '$src'");
-        if(mysqli_num_rows($clients_sourse) >= 1){
-            array_push( $table_count,mysqli_num_rows($clients_sourse));
-        }
-    }
+    $table_count = get_count_clients_in_sources($table_source,$connect);
     //для прибыли 
-    $table_price = array();
-
-    foreach($table_source as $src){
-        $client_id = mysqli_query($connect,"SELECT `id` FROM clients WHERE source = '$src'");
-        $client_id = mysqli_fetch_all($client_id);
-        $out_price = 0;
-        foreach($client_id as $id){
-            $task_price = mysqli_query($connect,"SELECT `price` FROM task WHERE client_id = '$id[0]'");
-            $task_price = mysqli_fetch_all($task_price);
-            
-            foreach($task_price as $price){
-                $out_price = $out_price+$price[0];
-            }
-            
-        }
-        array_push($table_price,$out_price);
-    }
+    $table_price = get_price_in_sources($table_source,$connect);
     //для отчета кол-во заказов и суммирования ценника
-    $client_task_count = array();
-    $client_task_price = array();
-    foreach($clients as $client_id){
-        $task_price = mysqli_query($connect,"SELECT `price` FROM task WHERE client_id = '$client_id[0]'");
-        array_push($client_task_count,mysqli_num_rows($task_price));
-        $task_price = mysqli_fetch_all($task_price);
-        $out_price = 0;
-        foreach($task_price as $price){
-            $out_price = $out_price+$price[0];
-        }
-        array_push($client_task_price,$out_price);
-    }
+    $client_task_count = get_client_task_count($clients,$connect);
+    $client_task_price = get_client_task_price($clients,$connect);
+    
     //
-    $users_task_count = array();
-    $users_task_price = array();
-    $users_SA = array();
-    $user_comment_count = array();
-    foreach ($users as $user) {
-        $task_price = mysqli_query($connect,"SELECT `price`,`id` FROM task WHERE supervisor_id = '$user[0]'");
-        array_push($users_task_count,mysqli_num_rows($task_price));
-        $task_price = mysqli_fetch_all($task_price);
-        $out_price = 0;
-        foreach($task_price as $price){
-            $out_price = $out_price+$price[0];
-        }
-        array_push($users_task_price,$out_price);
-
-        $comment_count = 0;
-        foreach($task_price as $price){
-            $comment = mysqli_query($connect,"SELECT `id` FROM comments WHERE supervisor_id = '$user[0]'");
-            //echo (mysqli_num_rows($comment));
-            array_push($user_comment_count,mysqli_num_rows($comment));
-        }
-
-    }
-    for ($i=0; $i < count($users_task_count); $i++) { 
-        if ($users_task_count[$i]==0) {
-            array_push($users_SA,0);
-        }else{
-            array_push($users_SA,($user_comment_count[$i]/$users_task_count[$i]));
-        }
-        
-    }
+    $users_task_count = get_users_task_count($users,$connect);
+    $users_task_price = get_users_task_price($users,$connect);
+    $users_SA = get_users_SA($users,$connect);
+    $user_comment_count = get_user_comment_count($users,$connect);
+    
 ?>
 
 <!DOCTYPE html>
@@ -137,7 +71,7 @@
                     <td><?php echo $usersItems[2];?></td>
                     <td><?php echo $usersItems[4];?></td>
                     <td><?php echo $usersItems[3];?></td>
-                    <td><a href="vendor/del_user.php?id=<?php echo $usersItems[0];?>">Удалить</a></td>
+                    <td><a href="vendor/db/del_user.php?id=<?php echo $usersItems[0];?>">Удалить</a></td>
                     <td><a href="vendor/update_user.php?id=<?php echo $usersItems[0];?>" onclick="show_update()">Изменить</a></td>
                 </tr>
             <?php        
@@ -145,7 +79,7 @@
             ?>
         </table>  
 
-        <form action="vendor/create_user.php" method="post">
+        <form action="vendor/db/create_user.php" method="post">
             <label>Логин</label>
             <input name="new_login" type="text" placeholder="Введите имя"required autocomplete="off">
             <label>Пароль</label>
@@ -160,7 +94,7 @@
             <button type="susbmit">Создать</button>
         </form>
 
-        <form action="vendor/update_user.php" class="update_user" id="form_update_user">
+        <form action="vendor/db/update_user.php" class="update_user" id="form_update_user">
             <label>Логин</label>
             <input name="new_login" type="text" placeholder="Введите имя">
             <label>Пароль</label>
@@ -179,7 +113,7 @@
 
     <div class="clients" id="form_clients">
         <input type="text" placeholder="Поиск">
-        <a href="vendor/new_client.php">Добавить нового клиента</a>
+        <a href="vendor/db/new_client.php">Добавить нового клиента</a>
         <table>
             <tr>
                 <th>Дата регистрации</th>

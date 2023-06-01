@@ -1,16 +1,15 @@
 <?php
     require_once('config/connect.php');
+    include_once('vendor/date_base.php');
     $client_id = !empty($_GET['id']) ? trim($_GET['id']) : '';
 
     $client_id = htmlspecialchars($client_id);
 
     $_SESSION['id_client'] = $client_id;
 
-    $client = mysqli_query($connect,"SELECT fio,address,telephone,mail,link,note,register_date,source FROM `clients` WHERE `id`='$client_id'");
-    $client = mysqli_fetch_assoc($client);
+    $client = get_clients_to_client_card($connect,$client_id);
 
-    $task = mysqli_query($connect,"SELECT * FROM `task` WHERE `client_id`='$client_id'");
-    $task = mysqli_fetch_all($task);
+    $task = get_tasks_to_client_card($connect,$client_id);
 ?>
 <!DOCTYPE html>
 <html lang="rus">
@@ -24,7 +23,7 @@
 </head>
 <body>   
     <div class="client_info">
-        <form class="form_clientInfo" action="vendor/update_client.php" method="post">
+        <form class="form_clientInfo" action="vendor/db/update_client.php" method="post">
             <input type="hidden" name="id" value="<?= $client_id?>">
 
             <label>Фамилия Имя Отчество</label>
@@ -63,10 +62,10 @@
         </form>
         <a href="main.php">Назад</a>
         <br>
-        <a href="vendor/del_client.php">удалить клиента</a>
+        <a href="vendor/db/del_client.php">удалить клиента</a>
         <br>
         <h2>Заказы клиента</h2>
-        <form action="vendor/create_task.php" method="post">
+        <form action="vendor/db/create_task.php" method="post">
             <input name="new_task" type="text"required autocomplete="off">
             <button type="submit">Добавить заказ</button>
         </form>
@@ -80,8 +79,8 @@
                 foreach($task as $tsk){
             ?>
                 <tr>
+                    <td><?php echo $tsk[1];?></td>
                     <td><?php echo $tsk[2];?></td>
-                    <td><?php echo $tsk[4];?></td>
                     <td><a href="client_task.php?id=<?php echo $tsk[0];?>">Параметры</a></td>
                 </tr>
             <?php        

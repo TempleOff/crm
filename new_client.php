@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="client_info">
-        <form class="form_clientInfo" action="create_client.php" method="post">
+        <form class="form_clientInfo" action="vendor/db/create_client.php" method="post">
             <label>Фамилия Имя Отчество</label>
             <input name="up_fio" type="text" required autocomplete="off">
             <br>

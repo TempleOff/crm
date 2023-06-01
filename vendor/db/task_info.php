@@ -1,5 +1,5 @@
 <?php
-    require_once('../config/connect.php');
+    require_once('../../config/connect.php');
 
     $user_name = $_SESSION['user_name'];
     $date_time = date("Y-m-d H:i:s", strtotime($date_time . ' +2 hours'));
@@ -37,6 +37,6 @@
         mysqli_query($connect,"INSERT INTO `history` (`id`, `data_time`, `user`, `change_name`, `changed_info`) VALUES (NULL, '$date_time ', '$user_name', 'Изменение в задаче', '$task_name')");
     }
 
-    header("Location:../client_card.php?id={$client}");
+    header("Location:../../client_card.php?id={$client}");
 
 ?>

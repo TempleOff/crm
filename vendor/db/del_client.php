@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    require_once('../config/connect.php');
+    require_once('../../config/connect.php');
     $id = $_SESSION['id_client'];
     
     $user_name = $_SESSION['user_name'];
@@ -16,6 +16,6 @@
     mysqli_query($connect,"DELETE FROM `task` WHERE `task`.`client_id` = $id;");
 
 
-    header('Location: ../main.php');
+    header('Location: ../../main.php');
 
 ?>
