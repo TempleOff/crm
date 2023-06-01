@@ -26,7 +26,7 @@
 
     $history_content = "";
     
-    $result = mysqli_query($connect, "SELECT * FROM clients WHERE id = $id");
+    $result = mysqli_query($connect, "SELECT fio,address,telephone,mail,link,note,register_date FROM clients WHERE id = $id");
     $client = mysqli_fetch_assoc($result);
 
     
@@ -51,7 +51,6 @@
     if($client['register_date'] != $up_date){
         $history_content = $history_content . "Дата регистрации было: ". $client['register_date'] . " Дата регистрации стало: " . $up_date . ";";
     }
-
     if($history_content != ""){
         mysqli_query($connect,"INSERT INTO `history` (`id`, `data_time`, `user`, `change_name`, `changed_info`) VALUES (NULL, '$date_time ', '$user_name', 'Изменение клиента', '$history_content')");
     }

@@ -4,13 +4,13 @@
     require_once('config/connect.php');
     $company_name = $_SESSION['db_name'];
 
-    $users = mysqli_query($connect,"SELECT * FROM `users`");
+    $users = mysqli_query($connect,"SELECT `id`,`name`,`password`,`roles`,`post` FROM `users`");
     $users = mysqli_fetch_all($users);
 
-    $clients = mysqli_query($connect,"SELECT * FROM `clients`");
+    $clients = mysqli_query($connect,"SELECT `id`,`fio`,`telephone`,`mail`,`link`,`register_date`,`source` FROM `clients`");
     $clients = mysqli_fetch_all($clients);
 
-    $history = mysqli_query($connect,"SELECT * FROM `history`");
+    $history = mysqli_query($connect,"SELECT `data_time`,`user`,`change_name`,`changed_info` FROM `history`");
     $history = mysqli_fetch_all($history);
     //для источников
     $clients_sourse = mysqli_query($connect,"SELECT `source` FROM `clients`");
@@ -81,7 +81,7 @@
 
         $comment_count = 0;
         foreach($task_price as $price){
-            $comment = mysqli_query($connect,"SELECT * FROM comments WHERE supervisor_id = '$user[0]'");
+            $comment = mysqli_query($connect,"SELECT `id` FROM comments WHERE supervisor_id = '$user[0]'");
             //echo (mysqli_num_rows($comment));
             array_push($user_comment_count,mysqli_num_rows($comment));
         }
@@ -135,8 +135,8 @@
                 <tr>
                     <td><?php echo $usersItems[1];?></td>
                     <td><?php echo $usersItems[2];?></td>
-                    <td><?php echo $usersItems[5];?></td>
                     <td><?php echo $usersItems[4];?></td>
+                    <td><?php echo $usersItems[3];?></td>
                     <td><a href="vendor/del_user.php?id=<?php echo $usersItems[0];?>">Удалить</a></td>
                     <td><a href="vendor/update_user.php?id=<?php echo $usersItems[0];?>" onclick="show_update()">Изменить</a></td>
                 </tr>
@@ -193,11 +193,11 @@
                 foreach($clients as $client){
             ?>
                 <tr>
-                    <td><?php echo $client[7];?></td>
+                    <td><?php echo $client[5];?></td>
                     <td><a href="client_card.php?id=<?php echo $client[0];?>"><?php echo $client[1];?></a></td>
+                    <td><?php echo $client[2];?></td>
                     <td><?php echo $client[3];?></td>
-                    <td><?php echo $client[4];?></td>
-                    <td><a href="<?php echo $client[5];?>"><?php echo $client[5];?></a></td>
+                    <td><a href="<?php echo $client[4];?>"><?php echo $client[4];?></a></td>
                 </tr>
             <?php        
             }
@@ -220,10 +220,10 @@
                 foreach($history as $story){
             ?>
                 <tr>
+                    <td><?php echo $story[0];?></td>
                     <td><?php echo $story[1];?></td>
                     <td><?php echo $story[2];?></td>
                     <td><?php echo $story[3];?></td>
-                    <td><?php echo $story[4];?></td>
                 </tr>
             <?php        
             }
@@ -276,7 +276,7 @@
                         ?>
                             <tr>
                                 <td><?php echo $clients[$i][1];?></td>
-                                <td><?php echo $clients[$i][8];?></td>
+                                <td><?php echo $clients[$i][6];?></td>
                                 <td><?php echo $client_task_count[$i];?></td>
                                 <td><?php echo $client_task_price[$i];?></td>
                             </tr>

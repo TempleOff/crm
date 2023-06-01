@@ -12,29 +12,28 @@
     <div class="client_info">
         <form class="form_clientInfo" action="create_client.php" method="post">
             <label>Фамилия Имя Отчество</label>
-            <input name="up_fio" type="text" value="<?= $client['fio']?>"required autocomplete="off">
+            <input name="up_fio" type="text" required autocomplete="off">
             <br>
             <label>Адрес</label>
-            <input name="up_address" type="text" value="<?= $client['address']?>"required autocomplete="off">
+            <input name="up_address" type="text" required autocomplete="off">
             <br>
             <label>Телефон</label>
-            <input name="up_telephone" type="text" value="<?= $client['telephone']?>"required autocomplete="off">
+            <input name="up_telephone" type="text" required autocomplete="off">
             <br>
             <label>Почта</label>
-            <input name="up_mail" type="text" value="<?= $client['mail']?>"required autocomplete="off">
+            <input name="up_mail" type="text" required autocomplete="off">
             <br>
             <label>Рабочая область</label>
-            <input name="up_link" type="text" value="<?= $client['link']?>"required autocomplete="off">
+            <input name="up_link" type="text" required autocomplete="off">
             <br>
             <label>Примечание</label>
-            <input name="up_note" type="text" value="<?= $client['note']?>"required autocomplete="off">
+            <input name="up_note" type="text" required autocomplete="off">
             <br>
             <label>Дата регистрации</label>
-            <input name="up_date" type="date" value="<?= $client['register_date']?>"required autocomplete="off">
+            <input name="up_date" type="date" required autocomplete="off">
             <br>
             <label>Источник</label>
             <select name="up_source"required>
-                <option value="<?= $client['source'] ?>" selected><?= $client['source'] ?></option>
                 <option value="Интернет">Интернет</option>
                 <option value="Социальные сети">Социальные сети</option>
                 <option value="Знакомые">Знакомые</option>

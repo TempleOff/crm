@@ -29,12 +29,12 @@
     error_reporting(E_ALL);
     $connect = $con;
 
-    $sql = "SELECT * FROM users WHERE name='$login' AND password='$paswd'";
+    $sql = "SELECT id FROM users WHERE name='$login' AND password='$paswd'";
     $result = mysqli_query($connect, $sql);  
     
     if (mysqli_num_rows($result) == 1) {
         $result = mysqli_fetch_all($result);
-        $_SESSION['user_id'] = $result[0][0];
+        $_SESSION['user_id'] = $result;
         header("Location:../main.php");
     } else {
         header("Location:../index.php");

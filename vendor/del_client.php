@@ -6,7 +6,7 @@
     $user_name = $_SESSION['user_name'];
     $date_time = date("Y-m-d H:i:s");
 
-    $result = mysqli_query($connect, "SELECT * FROM clients WHERE id = $id");
+    $result = mysqli_query($connect, "SELECT fio FROM clients WHERE id = $id");
     $client = mysqli_fetch_assoc($result);
     $client = implode(' ', $client);
 

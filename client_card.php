@@ -6,7 +6,7 @@
 
     $_SESSION['id_client'] = $client_id;
 
-    $client = mysqli_query($connect,"SELECT * FROM `clients` WHERE `id`='$client_id'");
+    $client = mysqli_query($connect,"SELECT fio,address,telephone,mail,link,note,register_date,source FROM `clients` WHERE `id`='$client_id'");
     $client = mysqli_fetch_assoc($client);
 
     $task = mysqli_query($connect,"SELECT * FROM `task` WHERE `client_id`='$client_id'");

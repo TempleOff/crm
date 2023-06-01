@@ -6,16 +6,16 @@
 
     $client_id = $_SESSION['id_client'];
 
-    $notes = mysqli_query($connect,"SELECT * FROM `comments` WHERE `task_id`='$task_id'");
+    $notes = mysqli_query($connect,"SELECT user_name,date_time,coment FROM `comments` WHERE `task_id`='$task_id'");
     $notes = mysqli_fetch_all($notes);
 
-    $task = mysqli_query($connect,"SELECT * FROM `task` WHERE `id`='$task_id'");
+    $task = mysqli_query($connect,"SELECT `name_task`,`desc`,`status`,`price` FROM `task` WHERE `id`='$task_id'");
     $task = mysqli_fetch_assoc($task);
 
     $task_name = $task['name_task'];
     $task_desk = $task['desc'];
 
-    $result = mysqli_query($connect, "SELECT * FROM clients WHERE id = $client_id");
+    $result = mysqli_query($connect, "SELECT id FROM clients WHERE id = $client_id");
     $client = mysqli_fetch_assoc($result);
 ?>
 <!DOCTYPE html> <?php ?>
@@ -66,9 +66,9 @@
                 foreach($notes as $note){
             ?>
                 <tr>
-                    <td><?php echo $note[3];?></td>
+                    <td><?php echo $note[1];?></td>
+                    <td><?php echo $note[0];?></td>
                     <td><?php echo $note[2];?></td>
-                    <td><?php echo $note[4];?></td>
                 </tr>
             <?php        
             }
