@@ -1,11 +1,15 @@
 <?php   
     require_once('../config/connect.php'); 
 
-    $name_user = $_POST['name_user']; 
-    $password = $_POST['password'];
-    $password_confirm = $_POST['password_confirm'];
-    $company_name = $_POST['company_name'];
+    $name_user = !empty($_POST['name_user']) ? trim($_POST['name_user']) : '';
+    $password = !empty($_POST['password']) ? trim($_POST['password']) : '';
+    $password_confirm = !empty($_POST['password_confirm']) ? trim($_POST['password_confirm']) : '';
+    $company_name = !empty($_POST['company_name']) ? trim($_POST['company_name']) : '';
 
+    $name_user = htmlspecialchars($name_user);
+    $password = htmlspecialchars($password);
+    $password_confirm = htmlspecialchars($password_confirm);
+    $company_name = htmlspecialchars($company_name);
 
     if($password === $password_confirm){
         mysqli_query($connect,"CREATE DATABASE $company_name");

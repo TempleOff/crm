@@ -6,10 +6,15 @@
     $user_name = $_SESSION['user_name'];
     $date_time = date("Y-m-d H:i:s", strtotime($date_time . ' +2 hours'));
 
-    $new_login = $_POST['new_login'];
-    $new_password = $_POST['new_password'];
-    $new_role = $_POST['new_role'];
-    $new_post = $_POST['new_post'];
+    $new_login = !empty($_POST['new_login']) ? trim($_POST['new_login']) : '';
+    $new_password = !empty($_POST['new_password']) ? trim($_POST['new_password']) : '';
+    $new_role = !empty($_POST['new_role']) ? trim($_POST['new_role']) : '';
+    $new_post = !empty($_POST['new_post']) ? trim($_POST['new_post']) : '';
+
+    $new_login = htmlspecialchars($new_login);
+    $new_password = htmlspecialchars($new_password);
+    $new_role = htmlspecialchars($new_role);
+    $new_post = htmlspecialchars($new_post);
 
     mysqli_query($connect,"INSERT INTO `history` (`id`, `data_time`, `user`, `change_name`, `changed_info`) VALUES (NULL, '$date_time ', '$user_name', 'Новый пользователь', '$new_login')");
 

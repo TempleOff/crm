@@ -1,15 +1,25 @@
 <?php 
     require_once('../config/connect.php');
-    $up_fio = $_POST['up_fio'];
-    $up_address = $_POST['up_address'];
-    $up_telephone = $_POST['up_telephone'];
-    $up_mail = $_POST['up_mail'];
-    $up_link = $_POST['up_link'];
-    $up_note = $_POST['up_note'];
-    $up_date = $_POST['up_date'];
-    $up_source = $_POST['up_source'];
 
-    $id = $_POST['id'];
+    $up_fio = !empty($_POST['up_fio']) ? trim($_POST['up_fio']) : '';
+    $up_address = !empty($_POST['up_address']) ? trim($_POST['up_address']) : '';
+    $up_telephone = !empty($_POST['up_telephone']) ? trim($_POST['up_telephone']) : '';
+    $up_mail = !empty($_POST['up_mail']) ? trim($_POST['up_mail']) : '';
+    $up_link = !empty($_POST['up_link']) ? trim($_POST['up_link']) : '';
+    $up_note = !empty($_POST['up_note']) ? trim($_POST['up_note']) : '';
+    $up_date = !empty($_POST['up_date']) ? trim($_POST['up_date']) : '';
+    $up_source = !empty($_POST['up_source']) ? trim($_POST['up_source']) : '';
+    $id = !empty($_POST['id']) ? trim($_POST['id']) : '';
+
+    $up_fio = htmlspecialchars($up_fio);
+    $up_address = htmlspecialchars($up_address);
+    $up_telephone = htmlspecialchars($up_telephone);
+    $up_mail = htmlspecialchars($up_mail);
+    $up_link = htmlspecialchars($up_link);
+    $up_note = htmlspecialchars($up_note);
+    $up_date = htmlspecialchars($up_date);
+    $up_source = htmlspecialchars($up_source);
+    $id = htmlspecialchars($id);
 
     $user_name = $_SESSION['user_name'];
     $date_time = date("Y-m-d H:i:s", strtotime($date_time . ' +2 hours'));

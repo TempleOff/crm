@@ -1,6 +1,8 @@
 <?php
     require_once('config/connect.php');
-    $task_id = $_GET['id'];
+    $task_id = !empty($_GET['id']) ? trim($_GET['id']) : '';
+
+    $task_id = htmlspecialchars($task_id);
 
     $client_id = $_SESSION['id_client'];
 

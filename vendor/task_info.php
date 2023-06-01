@@ -4,12 +4,17 @@
     $user_name = $_SESSION['user_name'];
     $date_time = date("Y-m-d H:i:s", strtotime($date_time . ' +2 hours'));
 
-    $task_name = $_POST['task_name'];
+    $task_name = !empty($_POST['task_name']) ? trim($_POST['task_name']) : '';
+    $task_id = !empty($_POST['id']) ? trim($_POST['id']) : '';
+    $description = !empty($_POST['description']) ? trim($_POST['description']) : '';
+    $price = !empty($_POST['price']) ? trim($_POST['price']) : '';
+    $status = !empty($_POST['status']) ? trim($_POST['status']) : '';
 
-    $task_id = $_POST['id'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-    $status = $_POST['status'];
+    $task_name = htmlspecialchars($task_name);
+    $task_id = htmlspecialchars($task_id);
+    $description = htmlspecialchars($description);
+    $price = htmlspecialchars($price);
+    $status = htmlspecialchars($status);
 
     $client = $_SESSION['id_client'];
 

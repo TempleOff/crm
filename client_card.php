@@ -1,13 +1,13 @@
 <?php
     require_once('config/connect.php');
-    $client_id = $_GET['id'];
+    $client_id = !empty($_GET['id']) ? trim($_GET['id']) : '';
+
+    $client_id = htmlspecialchars($client_id);
+
     $_SESSION['id_client'] = $client_id;
 
     $client = mysqli_query($connect,"SELECT * FROM `clients` WHERE `id`='$client_id'");
     $client = mysqli_fetch_assoc($client);
-
-    //$notes = mysqli_query($connect,"SELECT * FROM `coments` WHERE `client_id`='$client_id'");
-    //$notes = mysqli_fetch_all($notes);
 
     $task = mysqli_query($connect,"SELECT * FROM `task` WHERE `client_id`='$client_id'");
     $task = mysqli_fetch_all($task);

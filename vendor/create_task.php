@@ -4,15 +4,19 @@
 
     $user_name = $_SESSION['user_name'];
     $date_time = date("Y-m-d H:i:s", strtotime($date_time . ' +2 hours'));
+
     
     $user_id = $_SESSION['user_id'];
-
     $client_id = $_SESSION['id_client'];
 
     $result = mysqli_query($connect, "SELECT * FROM clients WHERE id = $client_id");
     $client = mysqli_fetch_assoc($result);
 
-    $new_task = $_POST['new_task'];
+
+    $new_task = !empty($_POST['new_task']) ? trim($_POST['new_task']) : '';
+
+    $new_task = htmlspecialchars($new_task);
+    
 
     $history_task = $history_task . "Клиент: ". $client['fio'] . " Заказ: " . $new_task. ";";
 
