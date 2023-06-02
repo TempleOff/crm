@@ -35,7 +35,7 @@
     if (mysqli_num_rows($result) == 1) {
         $result = mysqli_fetch_assoc($result);
         $_SESSION['user_id'] = $result['id'];
-        header("Location:../../main.php");
+        header("Location:../../main.php?role=");
     } else {
         header("Location:../../index.php");
     }

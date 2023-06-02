@@ -83,3 +83,20 @@ details:hover{
 .tab :checked ~ .tab-content {
  display: block; /* Показываем активную вкладку */
 }
+.client_card{
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+}
+.client_info{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 700px;
+
+}
+.form_clientInfo{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}

@@ -14,6 +14,6 @@
 
     mysqli_query($connect,"DELETE FROM `users` WHERE `users`.`id` = $id;");
 
-    header('Location: ../../main.php');
+    header('Location: ../../main.php?role=');
 
 ?>

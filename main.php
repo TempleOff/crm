@@ -30,31 +30,11 @@
     $user_comment_count = get_user_comment_count($users,$connect);
     
 ?>
+<?php include_once('templets\header.php'); ?>
 
-<!DOCTYPE html>
-<html lang="rus">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRM</title>
-    <link rel="stylesheet" href="assets/css/style_main.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-</head>
-<body>
-    <header>
-        <ul>
-            <li><?php echo ($company_name);?></li>
-            <li><a href="#" onclick="roles()">Сотрудники</a></li>
-            <li><a href="#" onclick="clients()">Клиенты</a></li>
-            <li><a href="#" onclick="history()">История</a></li>
-            <li><a href="#" onclick="reports()">Отчеты</a></li>
-            <li><a href="vendor/exit.php">Выход</a></li>
-            
-        </ul>
-    </header>
+    
     <!---->
-    <div class="roles" id="form_roles"> <!--Форма для просмотра сотрудников и добавления-->
+    <div class="roles" id="form_roles"<?php if(isset($_GET['role']))echo"style=\"display:flex\""?>> <!--Форма для просмотра сотрудников и добавления-->
         <table>
             <tr>
                 <th>Имя</th>
@@ -111,9 +91,8 @@
         </form>          
     </div>
 
-    <div class="clients" id="form_clients">
-        <input type="text" placeholder="Поиск">
-        <a href="vendor/db/new_client.php">Добавить нового клиента</a>
+    <div class="clients" id="form_clients"<?php if(isset($_GET['client']))echo"style=\"display:flex\""?>>
+        <a href="new_client.php">Добавить нового клиента</a>
         <table>
             <tr>
                 <th>Дата регистрации</th>
@@ -140,7 +119,7 @@
         </table>  
     </div>
 
-    <div class="history" id="form_history">
+    <div class="history" id="form_history" <?php if(isset($_GET['history']))echo"style=\"display:flex\""?>>
 
         <table>
             <tr>
@@ -168,7 +147,7 @@
     
     <br>
     
-    <div class="reports" id="form_reports">
+    <div  class="reports" id="form_reports" <?php if(isset($_GET['reports']))echo"style=\"display:flex\""?>>
         <div class="tabs">
             <div class="tab">
                 <input type="radio" id="tab1" name="tab-group" checked>
@@ -251,6 +230,4 @@
 
 
 
-</body>
-<script src="assets/scripts/Script.js"></script>
-</html>
+<?php include_once('templets\footer.php'); ?>

@@ -27,5 +27,5 @@
     mysqli_query($connect,"INSERT INTO `history` (`id`, `data_time`, `user`, `change_name`, `changed_info`) VALUES (NULL, '$date_time ', '$user_name', 'Новый клиент', '$new_fio')");
 
     mysqli_query($connect,"INSERT INTO `clients` (`id`, `fio`, `address`, `telephone`, `mail`, `link`, `note`, `register_date`, `source`) VALUES (NULL, '$new_fio', '$new_address', '$new_telephone', '$new_mail', ' $new_link', '$new_note', '$new_date', '$new_source')");
-    header('Location: ../../main.php');
+    header('Location: ../../main.php?client=');
 ?>

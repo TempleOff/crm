@@ -19,5 +19,5 @@
     mysqli_query($connect,"INSERT INTO `history` (`id`, `data_time`, `user`, `change_name`, `changed_info`) VALUES (NULL, '$date_time ', '$user_name', 'Новый пользователь', '$new_login')");
 
     mysqli_query($connect,"INSERT INTO `users` (`id`, `name`, `password`, `company_name`, `roles`, `post`) VALUES (NULL, '$new_login', '$new_password', '$company_name', '$new_role', '$new_post')");
-    header('Location: ../../main.php');
+    header('Location: ../../main.php?role=');
 ?>

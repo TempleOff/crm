@@ -16,6 +16,6 @@
     mysqli_query($connect,"DELETE FROM `task` WHERE `task`.`client_id` = $id;");
 
 
-    header('Location: ../../main.php');
+    header('Location: ../../main.php?client=');
 
 ?>

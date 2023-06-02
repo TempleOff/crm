@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="rus">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добавление клиента</title>
-    <link rel="stylesheet" href="../assets/css/style_client.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-</head>
-<body>
+<?php include_once('templets\header.php'); ?>
+<div class="client_card">
     <div class="client_info">
         <form class="form_clientInfo" action="vendor/db/create_client.php" method="post">
             <label>Фамилия Имя Отчество</label>
@@ -44,7 +35,7 @@
             <br>
             <button type="submit">Добавить клиента</button>
         </form>
-        <a href="../main.php">Назад</a>
+        <a href="../main.php?client=">Назад</a>
     </div>
-</body>
-</html>
+</div>
+<?php include_once('templets\footer.php'); ?>

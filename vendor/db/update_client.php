@@ -59,5 +59,5 @@
 
     mysqli_query($connect,"UPDATE `clients` SET `fio` = '$up_fio', `address` = '$up_address', `telephone` = '$up_telephone', `mail` = '$up_mail', `link` = '$up_link', `note` = '$up_note', `register_date` = '$up_date', `source` = '$up_source' WHERE `clients`.`id` = '$id'");
 
-    header('Location:../../main.php');
+    header('Location:../../main.php?client=');
 ?>

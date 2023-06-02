@@ -3,14 +3,17 @@ function roles() {
   var form_client = document.getElementById("form_clients");
   var form_report = document.getElementById("form_reports");
   var form_story = document.getElementById("form_history");
-  if (form_role.style.display == "flex") {
-    form_role.style.display = "none";
-  } else {
+  
+  if(form_role == null){
+    location.replace("../main.php?role=")
+  }
+
+  
     form_role.style.display = "flex"; 
     form_client.style.display = "none";
     form_report.style.display = "none";
     form_story.style.display = "none";
-  }
+  
 }
 
 function clients() {
@@ -18,14 +21,15 @@ function clients() {
   var form_client = document.getElementById("form_clients");
   var form_report = document.getElementById("form_reports");
   var form_story = document.getElementById("form_history");
-  if (form_client.style.display == "flex") {
-    form_client.style.display = "none";
-  } else {
+  if(form_role == null){
+    location.replace("../main.php?client=")
+  }
+  
     form_client.style.display = "flex"; 
     form_role.style.display = "none";
     form_report.style.display = "none";
     form_story.style.display = "none";
-  }
+  
 }
 
 function reports() {
@@ -33,14 +37,15 @@ function reports() {
   var form_client = document.getElementById("form_clients");
   var form_report = document.getElementById("form_reports");
   var form_story = document.getElementById("form_history");
-  if (form_report.style.display == "flex") {
-    form_report.style.display = "none";
-  } else {
+  if(form_role == null){
+    location.replace("../main.php?reports=")
+  }
+  
     form_report.style.display = "flex";
     form_client.style.display = "none"; 
     form_role.style.display = "none";
     form_story.style.display = "none";
-  }
+
 }
 
 function history() {
@@ -48,14 +53,15 @@ function history() {
   var form_client = document.getElementById("form_clients");
   var form_report = document.getElementById("form_reports");
   var form_story = document.getElementById("form_history");
-  if (form_story.style.display == "flex") {
-    form_story.style.display = "none";
-  } else {
+  if(form_role == null){
+    location.replace("../main.php?history=")
+  }
+  
     form_story.style.display = "flex";
     form_client.style.display = "none"; 
     form_role.style.display = "none";
     form_report.style.display = "none";
-  }
+  
 }
 
 function show_update(){

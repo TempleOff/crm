@@ -11,17 +11,8 @@
 
     $task = get_tasks_to_client_card($connect,$client_id);
 ?>
-<!DOCTYPE html>
-<html lang="rus">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRM</title>
-    <link rel="stylesheet" href="assets/css/style_client.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-</head>
-<body>   
+<?php include_once('templets\header.php'); ?>
+<div class="client_card">
     <div class="client_info">
         <form class="form_clientInfo" action="vendor/db/update_client.php" method="post">
             <input type="hidden" name="id" value="<?= $client_id?>">
@@ -60,7 +51,7 @@
             <br>
             <button type="submit">Обновить данные</button>
         </form>
-        <a href="main.php">Назад</a>
+        <a href="main.php?client=">Назад</a>
         <br>
         <a href="vendor/db/del_client.php">удалить клиента</a>
         <br>
@@ -88,5 +79,5 @@
             ?>
         </table>
     </div> 
-</body>
-</html>
+</div>
+<?php include_once('templets\footer.php'); ?>
